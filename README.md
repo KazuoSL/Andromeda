@@ -9,15 +9,15 @@ Neste jogo você é o piloto de uma nave espacial encarregada pela missão Unive
 https://drive.google.com/file/d/1l7VfCAVug_V4A1bt65fRErPyKV1zDTr8/view?usp=share_link
 
 # Controles
-Os controles do jogo são "A" para se movimentar para a esquerda e "D" para se movimentar para a direita.
+Os controles do jogo são "A" para movimentar a nave para a esquerda e "D" para movimentar a nave para a direita.
 
 # O Jogo
 ![image](https://user-images.githubusercontent.com/85579733/208329200-ba8673dd-66d0-4d5f-a1da-6da073360427.png)
 
 ![image](https://user-images.githubusercontent.com/85579733/208329239-e9618b9c-78f6-46e3-ab2d-e3f104062a64.png)
 
-# O Choque
+# A Derrota
 ![image](https://user-images.githubusercontent.com/85579733/208329261-abd20272-78b9-4cf9-b3ac-1e2bee7c5f36.png)
 
-# A Glória
+# A Vitória
 ![image](https://user-images.githubusercontent.com/85579733/208329568-3cc676d7-7f9a-435a-bfba-324b0072c8ff.png)
