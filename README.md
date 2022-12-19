@@ -5,6 +5,9 @@ Jogo desenvolvido para a disciplina SSC0513 - Organizacao e Arquitetura de Compu
 Jogo desenvolvido em linguagem Assembly inspirado em jogos classicos do arcade.
 Neste jogo você é o piloto de uma nave espacial encarregada pela missão Universo II, cujo objetivo é atravessar a galáxia de Andrômeda. Um belo dia viajando pela galaxia, sua nave passa por um anel de asteróides. A sua vida e a de sua tripulação estão em perigo e dependem de você, que deve proteger a sua tripulação e garantir o sucesso da missão.
 
+# Apresentação
+https://drive.google.com/file/d/1l7VfCAVug_V4A1bt65fRErPyKV1zDTr8/view?usp=share_link
+
 # Controles
 Os controles do jogo são "A" para se movimentar para a esquerda e "D" para se movimentar para a direita.
 
