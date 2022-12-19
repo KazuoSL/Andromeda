@@ -1,15 +1,15 @@
 ; Mensagens padrão
-msgLose: string "Sua nave chocou com um asteroide em altavelocidade, a nave perdeu pressao e BUM explodiu, contudo uma maquina do tempo  pode lhe levar de volta ao inicio                                                                                        Deseja jogar novamente                         [s]/[n]"
+msgLose: string "Sua nave chocou com um asteroide em alta velocidade, a nave perdeu pressao e BUM explodiu, contudo uma maquina do tempo  pode lhe levar de volta ao inicio                                                                                        Deseja jogar novamente                         [s]/[n]"
 msgStart: string "Respire fundo, e aperte espaco          para iniciar (A e D para mover   W/D para acelerar)"
 msgScore: string "ANOS LUZ"
-msgWin: string " Voce passou pela chuva de            asteorides piloto. voce e um heroi       e salvou a missao e sua tripulacao             otimo trabalho"
+msgWin: string " Voce passou pela chuva de            asteroides piloto. voce e um heroi       e salvou a missao e sua tripulacao             otimo trabalho"
 
 Letra: var #1 ; variável que contém a letra digitada
 
 ; Strings para imprimir a 'imagem' na tela inicial
 linhaIni0: string "                                        "
 linhaIni1: string "                                        "
-linhaIni2: string "   ANEL DE ASTEORIDES EM ANDROMEDA!     "
+linhaIni2: string "   ANEL DE ASTEROIDES EM ANDROMEDA!     "
 linhaIni3: string "                                        "
 linhaIni4: string "	                                       "
 linhaIni5: string " Um belo dia viajando pela galaxia      "  
