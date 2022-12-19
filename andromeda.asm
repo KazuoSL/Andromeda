@@ -367,7 +367,7 @@ incObs:
 	jeq WinScreen			; Se terminou, pula para a tela de jogo ganho
 	call PrintScore			; Imprime a pontuação
 	call printObj			; Imprime objetos
-	call movePig			; Movimenta o nave
+	call moveStarship			; Movimenta o nave
 	inc r7
 
 jmp main
@@ -504,7 +504,7 @@ incCountPrintObj:
 	cgr LoadVector			; Se chegou, chama a função que carrega o vetor de objetos
 rts
 
-printPig:
+printStarship:
     push r6
 
     loadn r6, #1148   ;cor do obj 
@@ -519,7 +519,7 @@ printPig:
     pop r6
 rts
 
-movePigL:
+moveStarshipL:
     push r6
 
     loadn r6, #40
@@ -528,15 +528,15 @@ movePigL:
     cmp r7, r6          ; Compara se a posicao é igual ao valor
     jeq dontMoveL       ; Nao realiza a movimentacao
 
-    call erasePig
+    call eraseStarship
     dec r0
-    call printPig
+    call printStarship
 
 dontMoveL:
     pop r6
 rts
 
-movePigR:
+moveStarshipR:
     push r6
 
     loadn r6, #40
@@ -546,15 +546,15 @@ movePigR:
     cmp r7, r6          ; Compara se a posicao é igual ao valor
     jeq dontMoveR       ; Nao realiza a movimentacao
 
-    call erasePig
+    call eraseStarship
     inc r0              ; Realiza a movimentacao
-    call printPig
+    call printStarship
 
 dontMoveR:
     pop r6
 rts
 
-erasePig:
+eraseStarship:
     loadn r7, #40
     outchar r5, r0      ; Apaga a primeira parte do nave
     add r0, r0, r7      ; Soma 40 a posicao para imprimir na linha de baixo
@@ -588,7 +588,7 @@ decR1:					;Conta de 300 a 0
 	pop r1
 rts
 
-movePig:
+moveStarship:
 	
 	push r2
 	push r4
@@ -599,13 +599,13 @@ movePig:
 	loadn r5, #' '          ; Armazena caractere ' ' para comparacao
 
 	
-	call printPig
+	call printStarship
 
     inchar r7           ; Le um valor do teclado e coloca em r7
     cmp r7, r2          ; Compara o valor lido com 'a'
-    ceq movePigL        ; Se for igual, movimenta o nave para a eraseC
+    ceq moveStarshipL        ; Se for igual, movimenta o nave para a eraseC
     cmp r7, r4          ; Compara o valor lido com 'd'
-    ceq movePigR        ; Se for igual, movimenta o nave para a direita
+    ceq moveStarshipR        ; Se for igual, movimenta o nave para a direita
 	pop r5
 	pop r4
 	pop r2
@@ -687,7 +687,7 @@ ImprimestrSai:
 rts		; retorno da subrotina
 
 Lose:						;Funcao de perda
-	call erasePig
+	call eraseStarship
 	call IncApagaTela
 	loadn r0, #40 			; Posiciona a mensagem
 	loadn r1, #msgLose		; Carrega o inicio da mensagem
