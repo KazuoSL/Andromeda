@@ -18,6 +18,14 @@ Neste jogo você é o piloto de uma nave espacial encarregada pela missão Unive
 # Controles
 Os controles do jogo são "A" para movimentar a nave para a esquerda e "D" para movimentar a nave para a direita. Manter "W" pressionado para acelerar a velocidade do jogo.
 
+# Funcionalidades
+1. Começar o jogo
+2. Mover nave
+3. Aumentar velocidade
+4. Perder
+5. Jogar novamente
+6. Vencer
+
 # O Jogo
 ![andromeda](https://user-images.githubusercontent.com/85579733/208552974-5ac5bc2a-7684-4d80-95aa-e92b4b033e38.gif)
 
