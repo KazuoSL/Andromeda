@@ -211,35 +211,35 @@ tela6Linha29 : string "                              | MINUTO  "
 
 Inicio:
 
-call StartScreen
-call printScore
+call StartScreen 		; Chama funcao que imprimi a tela de inicio
+call printScore			; Chama funcao que imprimi o score
 
 	loadn r1, #tela3Linha0		; Endereco onde comeca a primeira linha do cenario!!
-	loadn r2, #2560             ;cor lima
+	loadn r2, #2560             	;cor lima
+	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+ 
+	loadn r1, #tela2Linha0	    	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r2, #0                	; cor branca
+	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	
+	loadn r1, #tela4Linha0      	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r2, #512              	; cor verde
+	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	
+	loadn r1, #tela5Linha0	    	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r2, #0                	; cor branca
+	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	
+	loadn r1, #tela6Linha0	    	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r2, #2560            	; cor lima
 	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
 
-	loadn r1, #tela2Linha0	    ; Endereco onde comeca a primeira linha do cenario!!
-	loadn r2, #0                ; cor branca
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
-	
-	loadn r1, #tela4Linha0      ; Endereco onde comeca a primeira linha do cenario!!
-	loadn r2, #512              ; cor verde
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
-	
-	loadn r1, #tela5Linha0	    ; Endereco onde comeca a primeira linha do cenario!!
-	loadn r2, #0                ; cor branca
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
-	
-	loadn r1, #tela6Linha0	    ; Endereco onde comeca a primeira linha do cenario!!
-	loadn r2, #2560             ; cor lima
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
-
-	loadn r0, #1099         ; Posicao inicial
+	loadn r0, #1099         	; Posicao inicial
 	loadn r1, #0			; Contador do vetor de posições de objetos
 	loadn r2, #0			; Contador da pontuação
 	loadn r3, #2000			; Limite da pontuação	
 	
-rand: var #80			; Vetor de posições aleatórias dos objetos
+rand: var #80				; Vetor de posições aleatórias dos objetos
 	static rand + #0, #141
 	static rand + #1, #96
 	static rand + #2, #147
@@ -351,9 +351,9 @@ printAgain:
 	outchar r0, r7			;print	
 	add r2, r2, r1			;desce pra linha de baixo
 	add r7, r7, r1			;desce pra linha de baixo
-	cmp r7, r6				;compara se ja chegou ao final da tela, se sim para de printar, se nao continua
-	jne printAgain
-	pop r2
+	cmp r7, r6			;compara se ja chegou ao final da tela  
+	jne printAgain			;se nao chegou, continua a printar
+	pop r2				;se sim para de printar
 	pop r1
 	pop r0
 
@@ -361,13 +361,13 @@ main:
 	
 incObs:
 	
-	call Delay
-	inc r2					; Incremento da pontuação
-	cmp r2, r3				; Compara para saber se o jogo terminou
+	call Delay			; Chama a funcao de velocidade de movimentacao do objeto
+	inc r2				; Incremento da pontuação
+	cmp r2, r3			; Compara para saber se o jogo terminou
 	jeq WinScreen			; Se terminou, pula para a tela de jogo ganho
 	call PrintScore			; Imprime a pontuação
 	call printObj			; Imprime objetos
-	call moveStarship			; Movimenta o nave
+	call moveStarship		; Movimenta o nave
 	inc r7
 
 jmp main
@@ -389,17 +389,17 @@ ImprimeTela2:
 	loadn r3, #40  			; Incremento da posicao da tela!
 	loadn r4, #41  			; incremento do ponteiro das linhas da tela
 	loadn r5, #1200 		; Limite da tela!
-	loadn r6, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r6, #tela0Linha0		; Endereco onde comeca a primeira linha do cenario!!
 	
    ImprimeTela2_Loop:
 		call ImprimeStr2
 		add r0, r0, r3  		; incrementaposicao para a segunda linha na tela -->  r0 = R0 + 40
 		add r1, r1, r4  		; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
 		add r6, r6, r4  		; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
-		cmp r0, r5				; Compara r0 com 1200
-		jne ImprimeTela2_Loop	; Enquanto r0 < 1200
+		cmp r0, r5			; Compara r0 com 1200
+		jne ImprimeTela2_Loop		; Enquanto r0 < 1200
 
-	pop r6	; Resgata os valores dos registradores utilizados na Subrotina da Pilha
+	pop r6					; Resgata os valores dos registradores utilizados na Subrotina da Pilha
 	pop r5
 	pop r4
 	pop r3
@@ -412,10 +412,10 @@ ApagaTela:
 	push r0
 	push r1
 	
-	loadn r0, #1200		; apaga as 1200 posicoes da Tela
-	loadn r1, #' '		; com "espaco"
+	loadn r0, #1200				; apaga as 1200 posicoes da Tela
+	loadn r1, #' '				; com "espaco"
 	
-	   ApagaTela_Loop:	;label for(r0=1200;r3>0;r3--)
+	   ApagaTela_Loop:			;label for(r0=1200;r3>0;r3--)
 		dec r0
 		outchar r1, r0
 		jnz ApagaTela_Loop
@@ -424,8 +424,10 @@ ApagaTela:
 	pop r0
 rts	
 	
-ImprimeStr2:	; Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o primeiro caractere da mensagem sera' impresso;  r1 = endereco onde comeca a mensagem; r2 = cor da mensagem.   
-				; Obs: a mensagem sera' impressa ate' encontrar "/0"
+ImprimeStr2:		; Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o primeiro caractere da mensagem sera' impresso
+			;  r1 = endereco onde comeca a mensagem
+			; r2 = cor da mensagem.   
+			; Obs: a mensagem sera' impressa ate' encontrar "/0"
 	push r0		; protege o r0 na pilha para preservar seu valor
 	push r1		; protege o r1 na pilha para preservar seu valor
 	push r2		; protege o r1 na pilha para preservar seu valor
@@ -444,8 +446,8 @@ ImprimeStr2:	; Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o pr
 		jeq ImprimeStr2_Sai
 		cmp r4, r5				; If (Char == ' ')  vai Pula outchar do espaco para nao apagar outros caracteres
 		jeq ImprimeStr2_Skip
-		add r4, r2, r4			; Soma a Cor
-		outchar r4, r0			; Imprime o caractere na tela
+		add r4, r2, r4				; Soma a Cor
+		outchar r4, r0				; Imprime o caractere na tela
    		storei r6, r4
    ImprimeStr2_Skip:
 		inc r0					; Incrementa a posicao na tela
@@ -463,7 +465,7 @@ ImprimeStr2:	; Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o pr
 	pop r0
 rts
 	
-printObj:					; Funcao que imprime os objetos
+printObj:						; Funcao que imprime os objetos
 	push r1
 	push r2
 	push r3
@@ -480,16 +482,16 @@ printObj:					; Funcao que imprime os objetos
 	loadn r7, #' '			; Armazena espaço para apagar objeto
 	
 incCountPrintObj:
-	loadi r4, r3						; Carrega o valor da posicao de r3 para r4
+	loadi r4, r3				; Carrega o valor da posicao de r3 para r4
 	call ShouldIEraseOrShouldINot		; Funcao que verifica se o objeto ainda esta na tela
-	add r4, r4, r6						; Soma 40 a posicao do objeto
+	add r4, r4, r6				; Soma 40 a posicao do objeto
 	call ShouldIPrintOrShouldINot		; Funcao que verifica se o objeto ainda esta na tela
-	cmp r4, r0							; Compara a ponteiro do objeto com o nave, para saber se houve colisao
-	jeq Lose							; Se houve colisao, pula para Lose
-	storei r3, r4						; Armazena o novo valor da posicao do objeto
-	inc r3								; Incrementa posicao do vetor
-	inc r1								; Incrementa iterador
-	cmp r1, r2							; Compara se iterador chegou ao fim
+	cmp r4, r0				; Compara a ponteiro do objeto com o nave, para saber se houve colisao
+	jeq Lose				; Se houve colisao, pula para Lose
+	storei r3, r4				; Armazena o novo valor da posicao do objeto
+	inc r3					; Incrementa posicao do vetor
+	inc r1					; Incrementa iterador
+	cmp r1, r2				; Compara se iterador chegou ao fim
 	jne incCountPrintObj
 	
 	pop r7
@@ -501,7 +503,7 @@ incCountPrintObj:
 	pop r3
 	pop r2
 	pop r1
-	cgr LoadVector			; Se chegou, chama a função que carrega o vetor de objetos
+	cgr LoadVector				; Se chegou, chama a função que carrega o vetor de objetos
 rts
 
 printStarship:
@@ -563,7 +565,7 @@ eraseStarship:
 rts
 
 
-Delay:					;Controla a velocidade da movimentacao
+Delay:			;Controla a velocidade da movimentacao
 	push r1
 	push r2
 	push r3
@@ -603,15 +605,15 @@ moveStarship:
 
     inchar r7           ; Le um valor do teclado e coloca em r7
     cmp r7, r2          ; Compara o valor lido com 'a'
-    ceq moveStarshipL        ; Se for igual, movimenta o nave para a eraseC
+    ceq moveStarshipL   ; Se for igual, movimenta o nave para a eraseC
     cmp r7, r4          ; Compara o valor lido com 'd'
-    ceq moveStarshipR        ; Se for igual, movimenta o nave para a direita
+    ceq moveStarshipR   ; Se for igual, movimenta o nave para a direita
 	pop r5
 	pop r4
 	pop r2
 rts
 
-LoadVector:					; Funcao que carrega o vetor de 15 objetos
+LoadVector:				; Funcao que carrega o vetor de 15 objetos
 
 	push r2
 	push r3
@@ -631,15 +633,15 @@ IncLoadVector:
 	inc r1
 	inc r3
 	loadi r6, r2			; Carrega r6 com o valor apontado por r2
-	inc r2					; Incrementa r2 para andar com o ponteiro
+	inc r2				; Incrementa r2 para andar com o ponteiro
 	storei r5, r6			; Armazena o valor de r6 no vetor de objetos
-	inc r5					; Incrementa r5 para andar com o ponteiro
-	cmp r3, r4				; Compara se iterador chegou ao fim
+	inc r5				; Incrementa r5 para andar com o ponteiro
+	cmp r3, r4			; Compara se iterador chegou ao fim
 	jne IncLoadVector		; Se não, volta para o loop
 	
-	loadn r2, #80		; Posicao final do vetor de posicoes
-	cmp r1, r2				; Comprara com o contador de index
-	ceq Reset				; Se for igual, reseta o contador de index
+	loadn r2, #80			; Posicao final do vetor de posicoes
+	cmp r1, r2			; Comprara com o contador de index
+	ceq Reset			; Se for igual, reseta o contador de index
 	
 	pop r6
 	pop r5
@@ -652,41 +654,41 @@ Reset:
 	loadn r1, #0			; Reseta o index para a primeira posicao
 rts
 
-Imprimestr:		;  Rotina de Impresao de Mensagens:    
+Imprimestr:			;  Rotina de Impresao de Mensagens:    
 				; r0 = Posicao da tela que o primeiro caractere da mensagem sera' impresso
 				; r1 = endereco onde comeca a mensagem
 				; r2 = cor da mensagem
 				; Obs: a mensagem sera' impressa ate' encontrar "/0"
 				
-; Empilhamento: protege os registradores utilizados na subrotina na pilha para preservar seu valor				
-	push r0	; Posicao da tela que o primeiro caractere da mensagem sera' impresso
-	push r1	; endereco onde comeca a mensagem
-	push r2	; cor da mensagem
-	push r3	; Criterio de parada
-	push r4	; Recebe o codigo do caractere da Mensagem
+				; Empilhamento: protege os registradores utilizados na subrotina na pilha para preservar seu valor				
+	push r0			; Posicao da tela que o primeiro caractere da mensagem sera' impresso
+	push r1			; endereco onde comeca a mensagem
+	push r2			; cor da mensagem
+	push r3			; Criterio de parada
+	push r4			; Recebe o codigo do caractere da Mensagem
 	
 	loadn r3, #'\0'	; Criterio de parada
 
 ImprimestrLoop:	
 	loadi r4, r1		; aponta para a memoria no endereco r1 e busca seu conteudo em r4
-	cmp r4, r3			; compara o codigo do caractere buscado com o criterio de parada
+	cmp r4, r3		; compara o codigo do caractere buscado com o criterio de parada
 	jeq ImprimestrSai	; goto Final da rotina
 	add r4, r2, r4		; soma a cor (r2) no codigo do caractere em r4
 	outchar r4, r0		; imprime o caractere cujo codigo está em r4 na posicao r0 da tela
-	inc r0				; incrementa a posicao que o proximo caractere sera' escrito na tela
-	inc r1				; incrementa o ponteiro para a mensagem na memoria
+	inc r0			; incrementa a posicao que o proximo caractere sera' escrito na tela
+	inc r1			; incrementa o ponteiro para a mensagem na memoria
 	jmp ImprimestrLoop	; goto Loop
 	
-ImprimestrSai:	
-; Desempilhamento: resgata os valores dos registradores utilizados na Subrotina da Pilha
+ImprimestrSai:			; Desempilhamento: resgata os valores dos registradores utilizados na Subrotina da Pilha
+
 	pop r4	
 	pop r3
 	pop r2
 	pop r1
 	pop r0
-rts		; retorno da subrotina
+rts				; retorno da subrotina
 
-Lose:						;Funcao de perda
+Lose:					;Funcao de perda
 	call eraseStarship
 	call IncApagaTela
 	loadn r0, #40 			; Posiciona a mensagem
@@ -699,12 +701,12 @@ AskContinue:
 	call DigLetra
 	loadn r0, #'n'
 	load r1, Letra
-	cmp r0, r1				; tecla == 'n' ?
-	jeq AskContinueEndGame	; tecla e' 'n'
+	cmp r0, r1			; tecla == 'n' ?
+	jeq AskContinueEndGame		; tecla e' 'n'
 	
 	loadn r0, #'s'
-	cmp r0, r1				; tecla == 's' ?
-	jne AskContinue	        ; tecla nao e' 's'
+	cmp r0, r1			; tecla == 's' ?
+	jne AskContinue	          	; tecla nao e' 's'
 	
 		
 	; Se quiser jogar novamente...
@@ -714,14 +716,14 @@ AskContinue:
 	pop r1
 	pop r0
 
-	pop r0					; Da um Pop a mais para acertar o ponteiro da pilha, pois nao vai dar o RTS !!
+	pop r0				; Da um Pop a mais para acertar o ponteiro da pilha, pois nao vai dar o RTS !!
 	jmp Inicio
 
  AskContinueEndGame:
 	call IncApagaTela
 	halt
 	
-IncApagaTela:		; Funcao que apaga a tela
+IncApagaTela:				; Funcao que apaga a tela
 	push r0
 	push r1
 	push r2
@@ -738,20 +740,20 @@ ApagaLoop:
 	pop r0
 rts
 	
-StartScreen:			; Imprime a tela de inicio
-	push r0
+StartScreen:				; Imprime a tela de inicio
+	push r0	
 	push r1
 	push r2
 	push r3
 	push r4
 	
 	loadn r1, #linhaIni0
-	loadn r2, #2560		;cor lima
+	loadn r2, #2560			;cor lima
 	call ImprimeTela
 	
 	loadn r0, #689
 	loadn r1, #msgStart
-	loadn r2, #0		;cor
+	loadn r2, #0			;cor
 	call Imprimestr
 	loadn r4, #' '
 StartLoop:
@@ -766,7 +768,7 @@ StartLoop:
 	pop r0
 rts
 	
-printScore:						; Imprime o mensagem de score
+printScore:				; Imprime o mensagem de score
 	loadn r0, #0
 	loadn r1, #msgScore
 	loadn r2, #0	
@@ -793,8 +795,8 @@ NotPrint:
 	pop r0
 rts
 	
-PrintScore:			   ; Imprime valor do score
-	push r0
+PrintScore:			 	; Imprime valor do score
+	push r0	
 	push r1
 	push r2
 	push r3
@@ -803,7 +805,7 @@ PrintScore:			   ; Imprime valor do score
 	push r6
 	push r7
 	
-	loadn r0, #43     ;Posicao do print na tela
+	loadn r0, #43     		;Posicao do print na tela
 	loadn r1, #10
 	loadn r4, #'0'
  	loadn r5, #2816;cor do obj
@@ -830,30 +832,30 @@ StopPrintScore:
 	pop r0
 rts
 
-ImprimeTela: 	;  Rotina de Impresao de Cenario na Tela Inteira
+ImprimeTela: 			;  Rotina de Impresao de Cenario na Tela Inteira
 				;  r1 = endereco onde comeca a primeira linha do Cenario
 				;  r2 = cor do Cenario para ser impresso
 
-	push r0	; protege o r3 na pilha para ser usado na subrotina
-	push r1	; protege o r1 na pilha para preservar seu valor
-	push r2	; protege o r1 na pilha para preservar seu valor
-	push r3	; protege o r3 na pilha para ser usado na subrotina
-	push r4	; protege o r4 na pilha para ser usado na subrotina
-	push r5	; protege o r4 na pilha para ser usado na subrotina
+	push r0			; protege o r3 na pilha para ser usado na subrotina
+	push r1			; protege o r1 na pilha para preservar seu valor
+	push r2			; protege o r1 na pilha para preservar seu valor
+	push r3			; protege o r3 na pilha para ser usado na subrotina
+	push r4			; protege o r4 na pilha para ser usado na subrotina
+	push r5			; protege o r4 na pilha para ser usado na subrotina
 
-	loadn r0, #80  	; posicao inicial tem que ser o comeco da tela!
-	loadn r3, #40  	; Incremento da posicao da tela!
-	loadn r4, #41  	; incremento do ponteiro das linhas da tela
-	loadn r5, #640 ; Limite da tela!
+	loadn r0, #80  		; posicao inicial tem que ser o comeco da tela!
+	loadn r3, #40  		; Incremento da posicao da tela!
+	loadn r4, #41  		; incremento do ponteiro das linhas da tela
+	loadn r5, #640 		; Limite da tela!
 	
    ImprimeTela_Loop:
 		call Imprimestr
 		add r0, r0, r3  		; incrementaposicao para a segunda linha na tela -->  r0 = R0 + 40
 		add r1, r1, r4  		; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
-		cmp r0, r5				; Compara r0 com 1200
-		jne ImprimeTela_Loop	; Enquanto r0 < 1200
+		cmp r0, r5			; Compara r0 com 1200
+		jne ImprimeTela_Loop		; Enquanto r0 < 1200
 
-	pop r5	; Resgata os valores dos registradores utilizados na Subrotina da Pilha
+	pop r5			; Resgata os valores dos registradores utilizados na Subrotina da Pilha
 	pop r4
 	pop r3
 	pop r2
@@ -861,7 +863,7 @@ ImprimeTela: 	;  Rotina de Impresao de Cenario na Tela Inteira
 	pop r0
 rts
   
-WinScreen:						;Tela de fim
+WinScreen:					;Tela de fim
 	loadn r5, #0
 	call IncApagaTela
 	call PrintScore
@@ -883,7 +885,7 @@ wait_key_loop_2:
 	call IncApagaTela
 	jmp Inicio
 	
-DigLetra:			; Espera que uma tecla seja digitada e salva na variavel global "Letra"
+DigLetra:					; Espera que uma tecla seja digitada e salva na variavel global "Letra"
 	push r0
 	push r1
 	loadn r1, #255	; Se nao digitar nada vem 255
@@ -891,9 +893,9 @@ DigLetra:			; Espera que uma tecla seja digitada e salva na variavel global "Let
    DigLetra_Loop:
 		inchar r0			; Le o teclado, se nada for digitado = 255
 		cmp r0, r1			;compara r0 com 255
-		jeq DigLetra_Loop	; Fica lendo ate' que digite uma tecla valida
+		jeq DigLetra_Loop		; Fica lendo ate' que digite uma tecla valida
 
-	store Letra, r0			; Salva a tecla na variavel global "Letra"
+	store Letra, r0				; Salva a tecla na variavel global "Letra"
 
 	pop r1
 	pop r0
