@@ -12,7 +12,7 @@ https://drive.google.com/file/d/1l7VfCAVug_V4A1bt65fRErPyKV1zDTr8/view?usp=share
 Os controles do jogo são "A" para movimentar a nave para a esquerda e "D" para movimentar a nave para a direita.
 
 # O Jogo
-![andromeda](https://user-images.githubusercontent.com/85579733/208552040-19f4b6e8-6703-40ef-a633-1ce7449dfe0a.gif)
+https://user-images.githubusercontent.com/85579733/208552497-a93bbf23-80c0-4b73-a3d9-6f65865bc9b2.mp4
 
 # A Derrota
 ![image](https://user-images.githubusercontent.com/85579733/208329261-abd20272-78b9-4cf9-b3ac-1e2bee7c5f36.png)
